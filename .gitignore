@@ -1,2 +1,2 @@
-docker-persistence/
 .env
+.DS_Store
