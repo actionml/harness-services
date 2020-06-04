@@ -1,0 +1,52 @@
+version: '3'
+services:
+  harness0:
+    restart: always
+    image: actionml/harness:develop
+    ports:
+      - "9090:9090"
+    environment:
+      HARNESS_URI: "http://0.0.0.0:9090"
+      ELASTICSEARCH_URI: "http://elasticsearch:9200"
+      MONGO_URI: "mongodb://mongo"
+      HARNESS_ENGINES_BACKEND: etcd
+      HARNESS_ETCD_ENDPOINTS: "http://etcd0:2379"
+      HARNESS_HTTP_TIMEOUT: ${HARNESS_HTTP_TIMEOUT}
+    depends_on:
+      - mongo
+      - elasticsearch
+      - etcd0
+      - etcd1
+      - etcd2
+    volumes:
+      - ${HARNESS_LOGS}:/harness/logs
+
+  harness1:
+    restart: always
+    image: actionml/harness:develop
+    ports:
+      - "9091:9091"
+    environment:
+      HARNESS_URI: "http://0.0.0.0:9091"
+      ELASTICSEARCH_URI: "http://elasticsearch:9200"
+      MONGO_URI: "mongodb://mongo"
+      HARNESS_ENGINES_BACKEND: etcd
+      HARNESS_ETCD_ENDPOINTS: "http://etcd0:2379"
+      HARNESS_HTTP_TIMEOUT: ${HARNESS_HTTP_TIMEOUT}
+    depends_on:
+      - mongo
+      - elasticsearch
+      - etcd0
+      - etcd1
+      - etcd2
+    volumes:
+      - ${HARNESS_LOGS}:/harness/logs
+
+  harness-cli:
+    restart: always
+    image: actionml/harness-cli:latest
+    environment:
+        PATH: "$PATH:/harness-cli/harness-cli"
+        HARNESS_SERVER_ADDRESS: "harness0"
+    volumes:
+    - ${CLI_DATA}:/harness-cli-data

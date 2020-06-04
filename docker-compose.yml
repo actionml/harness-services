@@ -36,6 +36,7 @@ services:
     image: quay.io/coreos/etcd
     ports:
       - "2379:2379"
+      - "2380:2380"
     volumes:
       - etcd0:/etcd_data
     command:
@@ -58,7 +59,7 @@ services:
   etcd1:
     image: quay.io/coreos/etcd
     ports:
-      - 2379
+      - "2379"
     volumes:
       - etcd1:/etcd_data
     command:
@@ -81,7 +82,7 @@ services:
   etcd2:
     image: quay.io/coreos/etcd
     ports:
-      - 2379
+      - "2379"
     volumes:
       - etcd2:/etcd_data
     command:
