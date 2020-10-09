@@ -33,3 +33,9 @@ Once deployed one or more containers in the collection can be updated. It is bes
  - `docker-compose up -d --build --force-recreate` to bring up all updated containers by recreating all images.
  - `docker-compose pull` is a very important command that will get the latest image version from the ActionML automated CI/CD pipeline. **Note**: this project uses a possibly unstable develop/SNAPSHOT version of Harness. To change this, edit docker-compose.yml and change the versions to `harness:latest` and `harness-cli:latest`, which will get stable released versions.
 
+## Versions
+
+The important branches of this project are:
+
+ - master: this will contain services for the latest release of harness in its master branch
+ - develop: this will contain services for the latest work-in-progress version of harness in its develop branch.
